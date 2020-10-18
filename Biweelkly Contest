@@ -1,0 +1,43 @@
+class Fancy {
+public:
+    int mod =1e9+7;
+    vector<long long> v;
+    Fancy() {
+        v.clear();
+    }
+
+    void append(int val) {
+        v.push_back(val%mod);
+    }
+
+    void addAll(int inc) {
+        for(int i=0;i<v.size();i++){
+            v[i]=((v[i]%mod)+(inc)%mod)%mod;
+        }
+    }
+
+    void multAll(int m) {
+        for(int i=0;i<v.size();i++){
+            v[i]=((v[i])%mod*(m)%mod)%mod;
+        }
+    }
+
+    int getIndex(int idx) {
+        if(idx>=v.size()){
+            return-1;
+        }
+        long long int ans=v[idx]%mod;
+        return ans%mod;
+    }
+};
+static bool     _foo = ios::sync_with_stdio(false);
+static ostream* _bar = cin.tie(NULL);
+
+/**
+ * Your Fancy object will be instantiated and called as such:
+ * Fancy* obj = new Fancy();
+ * obj->append(val);
+ * obj->addAll(inc);
+ * obj->multAll(m);
+ * int param_4 = obj->getIndex(idx);
+ */

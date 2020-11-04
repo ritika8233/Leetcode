@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int util(int n,vector<int>& num,int ind,vector<int> &dp){
+        int ans=0;
+        if(ind>=n){
+            return 0;
+        }
+        if(dp[ind]!=-1) return dp[ind];
+        int l=num[ind]+util(n,num,ind+2,dp);
+        int r=util(n,num,ind+1,dp);
+        ans+=max(l,r);
+        dp[ind]=ans;
+        return dp[ind];
+    }
+    int rob(vector<int>& num) {
+        int n=num.size();
+        if(n==0){
+            return 0;
+        }
+        if(n==1){
+            return num[0];
+        }
+        if(n==2){
+            return max(num[0],num[1]);
+        }
+        vector<int> dp(n+1,-1);
+        return util(n,num,0,dp);
+    }
+};

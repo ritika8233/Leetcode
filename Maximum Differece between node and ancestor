@@ -1,0 +1,27 @@
+int util(int p,TreeNode* root){
+        int res=0;
+        if(root){
+        res=max(res,abs(p-root->val));
+        res=max(res,util(p,root->left));
+        res=max(res,util(p,root->right));
+        }
+        return res;
+    }
+    int maxAncestorDiff(TreeNode* root) {
+      if(!root || (!root->left && !root->right))return 0;
+        int ans=0,l=0,r=0;
+        if(!root->right){
+         ans=max(ans,util(root->val,root->left));
+         ans=max(ans,maxAncestorDiff(root->left));
+        }
+        else if(!root->left){
+         ans=max(ans,util(root->val,root->right));
+         ans=max(ans,maxAncestorDiff(root->right));           }
+        else{
+           ans=max(ans,util(root->val,root->left));
+           ans=max(ans,util(root->val,root->right));
+           ans=max(ans,maxAncestorDiff(root->left));
+           ans=max(ans,maxAncestorDiff(root->right));
+        }
+         return ans;
+    }

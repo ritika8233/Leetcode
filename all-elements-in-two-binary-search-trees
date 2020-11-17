@@ -1,0 +1,17 @@
+class Solution {
+public:
+    void util(TreeNode* root,vector<int> &v){
+        if(root){
+            v.push_back(root->val);
+            util(root->left,v);
+            util(root->right,v);
+        }
+    }
+    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+      vector<int> v;
+        util(root1,v);
+        util(root2,v);
+        sort(v.begin(),v.end());
+        return v;
+    }
+};

@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void util(TreeNode* root,vector<int> &v){
+        if(root){
+            v.push_back(root->val);
+            util(root->left,v);
+            util(root->right,v);
+        }
+    }
+    TreeNode* increasingBST(TreeNode* root) {
+        if(!root || (!root->left && !root->right))return root;
+        vector<int> v;
+        util(root,v);
+        sort(v.begin(),v.end());
+        TreeNode* dummy=new TreeNode();
+        TreeNode* temp=dummy;
+        for(int i=0;i<v.size();i++){
+            TreeNode *node=new TreeNode(v[i]);
+            temp->right=node;
+            temp=temp->right;
+        }
+        return dummy->right;
+    }
+};

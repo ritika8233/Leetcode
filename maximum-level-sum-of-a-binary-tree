@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int util(TreeNode* root){
+        if(!root)return 0;
+        return max(util(root->left),util(root->right))+1;
+    }
+    void util2(int h,int l,TreeNode* root,int &sum){
+        if(root){
+            if(h==l){
+                sum+=root->val;
+            }
+            util2(h,l+1,root->left,sum);
+            util2(h,l+1,root->right,sum);
+        }
+    }
+    int maxLevelSum(TreeNode* root) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        if(!root->left && !root->right)return root->val;
+        int h=util(root);
+        int sum=0,ans=INT_MIN,ind=0;
+        for(int i=1;i<=h;i++){
+            sum=0;
+            util2(i,1,root,sum);
+            if(ans < sum){
+                ans=sum;
+                ind=i;
+            }
+        }
+        return ind;
+    }
+};

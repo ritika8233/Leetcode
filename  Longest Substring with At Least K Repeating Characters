@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int util(string s,int start,int end,int k){
+        if((end-start)<k)return 0;
+        int arr[26]={0};
+        for(int i=start;i<end;i++){
+            arr[s[i]-'a']++;
+        }
+        for(int i=start;i<end;i++){
+            if(arr[s[i]-'a']<k){
+                int j=i+1;
+                while((j<end) && (arr[s[j]-'a']<k)){
+                    j++;
+                }
+                return max(util(s,start,i,k),util(s,j,end,k));
+            }
+        }
+        return end-start;
+    }
+    int longestSubstring(string s, int k) {
+        //cout<<s.length();
+        return util(s,0,s.length(),k);
+    }
+};

@@ -1,0 +1,37 @@
+class Solution {
+public:
+    int kthFactor(int n, int k) {
+        int c=0;
+        for(int i=1; i<=sqrt(n); i++){
+            if(n%i==0){
+                c++;
+                if((i!=n/i)){
+                    c++;
+                }
+            }
+        }
+        if(k>c){
+            return -1;
+        }
+        int r=1;
+        for(int i=1; i<=sqrt(n); i++){
+            if(n%i==0){
+                if(r==k){
+                  return i;
+                }
+                r++;
+            }
+        }
+        for(int i=sqrt(n); i>=1; i--){
+            if(n%i==0){
+                if(i!=n/i){
+                    if(r==k){
+                        return n/i;
+                    }
+                    r++;
+                }
+            }
+        }
+        return -1;
+    }
+};

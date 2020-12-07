@@ -1,0 +1,40 @@
+class Solution {
+public:
+    int k=1;
+   // k++;
+    void util(vector<vector<int>> &v,int s,int e){
+        //horizontal first
+        for(int i=s;i<=e;i++){
+            v[s][i]=k++;
+        }
+        //vertical last
+        for(int i=s+1;i<=e;i++){
+            v[i][e]=k++;
+        }
+        //bottom horizontal
+        for(int i=e-1;i>=s;i--){
+            v[e][i]=k++;
+        }
+        //leftmost vertical
+        for(int i=e-1;i>s;i--){
+            v[i][s]=k++;
+        }
+    }
+    vector<vector<int>> generateMatrix(int n) {
+    vector<vector<int>> v(n,vector<int>(n,0));
+        if(n==1){
+          v[0][0]=1;
+          return v;
+        }
+        if(n%2!=0){
+         for(int i=0;i<=n/2;i++){
+            util(v,i,n-1-i);
+          }
+        }else{
+          for(int i=0;i<n/2;i++){
+             util(v,i,n-1-i);
+           }
+        }
+        return v;
+    }
+};

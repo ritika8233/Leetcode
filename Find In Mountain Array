@@ -1,0 +1,79 @@
+/**
+ * // This is the MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * class MountainArray {
+ *   public:
+ *     int get(int index);
+ *     int length();
+ * };
+ */
+
+class Solution {
+public:
+    int util(MountainArray &m,int l,int r){
+        if(l<=r){
+            int mid=l+(r-l)/2;// 0 2 5
+            int prev=m.get(mid-1);
+            int next=m.get(mid+1);
+            int c=m.get(mid);
+            if( ( prev < c) && (next > c) ){
+                return util(m,mid,r);
+            }//  5 2 1
+            else if((prev > c) && (next < c) ){
+                return util(m,l,mid);
+            }
+            else{
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+    int inc(MountainArray &m,int target,int l,int r){
+        if(l<=r){
+            int mid=l+(r-l)/2;
+            int c=m.get(mid);
+            if(c==target){
+                return mid;
+            }
+            else if(c > target){
+                return inc(m,target,l,mid-1);
+            }
+            else if(c < target){
+                return inc(m,target,mid+1,r);
+            }
+        }
+        return -1;
+    }
+
+    int dec(MountainArray &m,int target,int l,int r){
+        if(l<=r){
+            int mid=l+(r-l)/2;
+            int c=m.get(mid);
+            if(c==target){
+                return mid;
+            }
+            else if(c < target){
+                return dec(m,target,l,mid-1);
+            }
+            else{
+                return dec(m,target,mid+1,r);
+            }
+        }
+        return -1;
+    }
+    int findInMountainArray(int target, MountainArray &m) {
+        int n=m.length();
+        int mid=util(m,0,n-1);
+        cout<<mid;
+        int ans=0;
+           ans=inc(m,target,0,mid);
+        if(ans==-1){
+           ans=dec(m,target,mid,n-1);
+        }
+        if((ans==-1) &&(target==m.get(n-1))){
+            ans=n-1;
+        }
+        return ans;
+    }
+};

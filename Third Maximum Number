@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int thirdMax(vector<int>& num) {
+        int n=num.size();
+        int m1=INT_MIN,ind=0;
+        int t=3;
+        int ans=INT_MIN,flag=0;
+        while(t!=0){
+            if(num.size()!=0){
+              m1=INT_MIN;
+              for(int i=0;i<num.size();i++){
+                if(m1<num[i]){
+                   m1=num[i];
+                }
+             }
+                if(flag==0){
+                    ans=m1;
+                    flag=1;
+                }
+            num.erase(remove(num.begin(), num.end(), m1), num.end());
+            }
+            else{
+              return ans;
+            }
+            t--;
+        }
+        return m1;
+    }
+};

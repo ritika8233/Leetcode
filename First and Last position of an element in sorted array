@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& num, int t) {
+      vector<int> v(2,-1);
+        int n=num.size();
+       for(int i=0;i<n;i++){
+           if(v[0]==-1 && num[i]==t){
+            v[0]=i;
+        }
+           if(v[0]!=-1 && num[i]==t ){
+               v[1]=i;
+           }
+      }
+        return v;
+    }
+};

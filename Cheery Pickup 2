@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int util(int i,int j,int row,int col,vector<vector<int>> &m,int j2,vector<vector<vector<int>>> &dp){
+        if(i==row || j==col  || j<0  || j2<0 || j2==col){
+            return 0;
+        }
+
+        if(dp[i][j][j2]!=-1){
+            return dp[i][j][j2];
+        }
+        int ans1=0,ans2=0,ans3=0,ans4=0;
+        int temp=0;
+
+        if(j==j2){
+            temp=m[i][j];
+        }else{
+            temp=m[i][j]+m[i][j2];
+        }
+
+        int l1=temp+util(i+1,j,row,col,m,j2,dp);
+        int r1=temp+util(i+1,j+1,row,col,m,j2,dp);
+        int k1=temp+util(i+1,j-1,row,col,m,j2,dp);
+
+        int l2=temp+util(i+1,j,row,col,m,j2+1,dp);
+        int r2=temp+util(i+1,j+1,row,col,m,j2+1,dp);
+        int k2=temp+util(i+1,j-1,row,col,m,j2+1,dp);
+
+        int l3=temp+util(i+1,j,row,col,m,j2-1,dp);
+        int r3=temp+util(i+1,j+1,row,col,m,j2-1,dp);
+        int k3=temp+util(i+1,j-1,row,col,m,j2-1,dp);
+
+
+        ans1=max(l1,max(r1,k1));
+        ans2=max(l2,max(r2,k2));
+        ans3=max(l3,max(r3,k3));
+
+        ans4+=max(ans1,max(ans2,ans3));
+        //cout<<ans<<" ";
+        dp[i][j][j2]=ans4;
+        return ans4;
+    }
+    int cherryPickup(vector<vector<int>>& m) {
+        int row = m.size();
+        int col = m[0].size();
+        vector<vector<vector<int>>> dp(row+1,vector<vector<int>>(col+1,vector<int>(col+1,-1)));
+        return (util(0,0,row,col,m,col-1,dp));
+    }
+};

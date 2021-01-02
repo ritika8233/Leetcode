@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool canFormArray(vector<int>& arr, vector<vector<int>>& p) {
+        int n = arr.size();
+        int m = p.size();
+        for(int i = 0 ; i < n ; i++){
+            int flag=0;
+            for(int j=0 ; j<m ;j++){
+                if(arr[i] == p[j][0]){
+                    flag=1;
+                    for(int k=0 ; k<p[j].size() ; k++){
+                        if(arr[i+k]!=p[j][k]){
+                            return false;
+                        }
+                    }
+                    i+=p[j].size()-1;
+                    break;
+                }
+            }
+            if(flag == 0){
+                return false;
+            }
+        }
+        return true;
+    }
+};

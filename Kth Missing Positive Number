@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int findKthPositive(vector<int>& arr, int k) {
+                std::ios::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        int n = arr.size();
+        vector<int> v (n+1001,0);
+        for(int i=0;i<n;i++){
+            v[arr[i]] = -1;
+        }
+        int c = 1;
+        int ans = 0;
+        for(int i=1;i<v.size();i++){
+            if(v[i]==0){
+                if(c == k){
+                    ans = i;
+                    break;
+                }
+                c++;
+            }
+        }
+        return ans;
+    }
+};

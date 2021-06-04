@@ -1,0 +1,41 @@
+class Solution {
+    public boolean lemonadeChange(int[] bill) {
+
+        int n = bill.length;
+        int f = 0, ten = 0, t = 0;
+
+        if(bill[0] != 5){
+            return false;
+        }
+
+        for(int i = 0; i < n; i++){
+            if(bill[i] == 5){
+                f++;
+            }
+            else if(bill[i] == 10){
+                ten++;
+                if(f <= 0){
+                    return false;
+                }
+                f--;
+            }
+            else{
+                t++;
+                if(ten > 0){
+                    ten--;
+                    if(f <= 0){
+                        return false;
+                    }
+                    f--;
+                }
+                else if(f >= 3){
+                    f -= 3;
+                }
+                else{
+                  return false;
+                }
+            }
+        }
+        return true;
+    }
+}

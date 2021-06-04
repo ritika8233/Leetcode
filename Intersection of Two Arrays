@@ -1,0 +1,41 @@
+class Solution {
+    public int[] intersection(int[] a1, int[] a2) {
+        Arrays.sort(a1);
+        Arrays.sort(a2);
+        int n1 = a1.length;
+        int n2 = a2.length;
+        List<Integer> v = new ArrayList<Integer>();
+
+
+        int i = 0, j = 0, k = 0;
+
+        while((i < n1) && (j < n2)){
+            while((i < n1-1) && a1[i] == a1[i+1]){
+                    i++;
+            }
+            while((j < n2-1) && a2[j] == a2[j+1]){
+                    j++;
+            }
+            if(a1[i] == a2[j]){
+                v.add(a1[i]);
+                i++;
+                j++;
+                k++;
+            }
+            else if(a1[i] > a2[j]){
+                j++;
+            }
+            else{
+                i++;
+            }
+        }
+
+        int[] ans = new int[v.size()];
+
+        for(int p = 0; p < v.size(); p++){
+            ans[p] = v.get(p);
+        }
+
+        return ans;
+    }
+}

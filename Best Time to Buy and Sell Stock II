@@ -1,0 +1,20 @@
+class Solution {
+    public int maxProfit(int[] p) {
+        int ans = 0;
+        int n = p.length;
+
+        for(int i = 0; i < n ; i++){
+            while((i<n-1) && (p[i+1] < p[i])){
+                i++;
+            }
+            int s = p[i];
+            while((i<n-1) && (p[i+1] > p[i])){
+                i++;
+            }
+            int h = p[i];
+            ans+=h-s;
+        }
+
+        return ans;
+    }
+}

@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool util(string a, string b){
+        for(int i = 0; i < b.length(); i++){
+            if(a[i] != b[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+    int strStr(string h, string t) {
+       //haystack = "hello", needle = "ll"
+
+        int n = h.length();
+        int m = t.length();
+
+        if(n == 0 && m == 0)return 0;
+        if(m > n){
+            return -1;
+        }
+
+        for(int i = 0; i <= n-m ; i++){
+            if(util(h.substr(i, m), t)){
+                return i;
+            }
+        }
+        return -1;
+    }
+};

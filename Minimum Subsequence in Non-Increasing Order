@@ -1,0 +1,30 @@
+class Solution {
+    public List<Integer> minSubsequence(int[] a) {
+        int n = a.length;// 3 4 8 9 10 // 3 7 15 24 34
+        List<Integer> ans = new ArrayList<>();
+        int l = 0;
+        Arrays.sort(a);
+        if(n == 1){
+            ans.add(a[0]);
+            return ans;
+        }
+        int[] b = new int[n];
+        b[0] = a[0];
+        for(int i = 1; i < n;i++){
+            b[i] = b[i-1] + a[i];
+        }
+        int flag =0;
+        for(int i = n-1;i>0;i--){
+            l += a[i];
+            ans.add(a[i]);
+            if(l > b[i-1]){
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0 ){
+            ans.add(a[0]);
+        }
+        return ans;
+    }
+}

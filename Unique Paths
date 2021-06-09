@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int util(int &ans, int i, int &r, int j, int &col, vector<vector<int>> &dp){
+        if(i == r-1 && j == col-1){
+            return 1;
+        }
+        if(dp[i][j] != -1)return dp[i][j];
+        int a = 0, b = 0;
+        if(i < r){
+             a = util(ans, i+1, r, j, col, dp);
+        }
+        if(j < col){
+             b = util(ans, i, r, j+1, col, dp);
+        }
+        dp[i][j] = a +b;
+        return dp[i][j];
+    }
+    int uniquePaths(int r, int c) {
+        int ans = 0;
+        vector<vector<int>> dp(r+1, vector<int>(c+1, -1));
+        return util(ans, 0, r, 0, c, dp);
+        //return ans;
+    }
+};

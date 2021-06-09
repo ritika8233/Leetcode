@@ -1,0 +1,50 @@
+class Solution {
+public:
+    int search(int x, vector<int>& ino, int l, int r){
+        for(int i = l; i <= r; i++){
+            if(ino[i] == x){
+                return i;
+            }
+        }
+        return -1;
+    }
+    TreeNode* util(vector<int>& ino, int l, int r, vector<int>& pre, int &ind, int n){
+        if(ind == n || ind < 0){
+            return NULL;
+        }
+        
+        if(l == r){
+            return new TreeNode(ino[l]);
+        }
+        TreeNode *root = new TreeNode();
+        root->val   = pre[ind];
+        int m = search(pre[ind], ino, l, r);
+        if(ind < n){
+            if(l > m-1){
+                root->left = NULL;
+            }
+            else{
+                ind++;
+              root->left  = util(ino, l, m-1, pre, ind, n);     
+            }
+        }
+        if(ind < n){
+            if(m+1 > r){
+                root->right = NULL;
+            }
+            else{
+                ind++;
+                root->right = util(ino, m+1, r, pre, ind, n);
+            }
+        }
+        return root;
+    }
+    TreeNode* buildTree(vector<int>& pre, vector<int>& ino) {
+         int n = pre.size();
+        if(n == 1){
+            return new TreeNode(pre[0]);
+        }
+        int i = 0;
+        return util(ino, 0 , n-1, pre, i, n);
+    }
+};

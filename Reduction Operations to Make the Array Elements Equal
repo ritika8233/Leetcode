@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int reductionOperations(vector<int>& v) {
+        int c = 0;
+        int n = v.size();
+        sort(v.begin(), v.end());
+        if(n == 1){
+            return c;
+        }
+        map<int, int> m;
+        
+        for(int i = 0; i < n; i++){
+           m[v[i]]++;   
+        }
+        int j = 1;
+        for(auto itr = m.begin(); itr != m.end(); itr++){
+            c += (j - 1)*itr->second;
+            j++;
+        }
+        return c;
+    }
+};

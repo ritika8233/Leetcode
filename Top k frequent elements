@@ -1,0 +1,32 @@
+class Solution {
+public:
+    typedef pair<int, int> pi;
+    vector<int> topKFrequent(vector<int>& v, int k) {
+        priority_queue<pi, vector<pi>, greater<pi> > pq;
+        sort(v.begin(), v.end());
+        int n = v.size();
+        int i =0, c =1;
+        vector<int> ans;
+        
+        while(i < n){
+            c = 1;
+            if((i < n-1) && v[i] == v[i+1]){
+                while((i < n-1) && v[i] == v[i+1]){
+                    i++;
+                    c++;
+                }
+            }
+            pq.push({c, v[i]});
+            if(pq.size() > k){
+                pq.pop();
+            }
+            i++;
+        }
+        while(!pq.empty()){
+            //cout<<pq.top().first<<" "<<pq.top().second<<endl;
+            ans.push_back(pq.top().second);
+            pq.pop();
+        }
+        return ans;
+    }
+};

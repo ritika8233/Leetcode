@@ -1,0 +1,43 @@
+class Solution {
+public:
+    void util(vector<int>& v, int i, int n, int s, int &c, int &t, int &flag){
+        if(s == c){
+            t++;
+            return;
+        }
+        if(i == n || s > c){
+            return;
+        }
+        if(v[i] > c){
+            flag = 1;
+            return;
+        }
+        if(flag == 0)
+        util(v, i, n, s + v[i], c, t, flag);
+        if(flag == 0)
+        util(v, i+1, n, s, c, t, flag);
+    }
+    bool makesquare(vector<int>& v) {
+        int n = v.size();
+        int c = 0;
+        for(int i = 0; i < n; i++){
+            c += v[i];    
+        }
+        if(c % 4 != 0)return false;
+        c = c/4;
+        sort(v.begin(), v.end());
+        
+        if(v[0] != c && v[n-1] != c && (v[0] + v[n-1] > c))return false;
+        
+        int flag = 0;
+        int t = 0;
+        
+        util(v, 0, n, 0, c, t, flag);
+        
+        if(flag == 1)return false;
+        if(t >= 4)
+        return true;
+     
+        return false;
+    }
+};

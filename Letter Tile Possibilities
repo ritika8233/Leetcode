@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void util(int i, int &n, string &s, string t, unordered_set<string> &st, bitset<7> &vis){
+        st.insert(t);
+        for(int j = 0; j < n; j++){
+            if(vis[j] == 0){
+                vis[j] = 1;
+                util(0, n, s, t, st, vis);
+                util(0, n, s, t+s[j], st, vis);
+                vis[j] = 0;
+            }
+        }
+    }
+    int numTilePossibilities(string s) {
+        int n = s.length();
+        string t = "";
+        unordered_set<string> st;
+        for(int i = 0; i < n; i++){
+           bitset<7> vis;
+            vis[i] = 1;
+            util(0, n, s, t+s[i], st, vis);
+        }
+        return st.size();
+    }
+};

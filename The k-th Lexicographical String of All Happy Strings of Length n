@@ -1,0 +1,31 @@
+class Solution {
+public:
+    void util(string &s, string t, int i, int &n, set<string> &st){
+        if(t.length() == n){
+            st.insert(t);
+        }
+        if(t.length() > n)return;
+        if(i == n){
+            return;
+        }
+        for(int j = 0; j < 3; j++){
+            if(t.length() == 0 || t[t.length()-1] != s[j])
+            util(s, t+s[j], i+1, n, st);
+         //   util(s, t, i+1, n, st);
+        }
+    }
+    string getHappyString(int p, int k) {
+        string s = "abc";
+        set<string> st;
+        string t = "";
+        util(s, t, 0, p, st);
+        if(k > st.size())return "";
+        for(auto itr = st.begin(); itr != st.end(); itr++){
+            if(k == 1){
+                return (*itr);
+            }
+            k--;
+        }
+        return "";
+    }
+};

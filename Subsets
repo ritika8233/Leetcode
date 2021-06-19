@@ -1,0 +1,35 @@
+class Solution {
+public:
+    void util(map<vector<int>, int> &m, vector<int> t, vector<int> &v, bitset<10> &vis, int i, int n){
+        //cout<<t<<" ";
+        m[t]++;
+        if(i == n){
+            return ;
+        }
+        util(m, t, v, vis, i+1, n);
+        if(vis[i] == 0){
+            vis[i] = 1;
+            t.push_back(v[i]);
+            util(m, t, v, vis, i+1, n);
+            t.pop_back();
+            vis[i] = 0;
+            //util(ans, t, v, vis, i+1, n);
+        }
+    }
+    vector<vector<int>> subsets(vector<int>& v) {
+        int n = v.size();
+        bitset<10> vis;
+        for(int i = 0; i < 10; i++){
+            vis[i] = 0;
+        }
+        vector<vector<int>> ans;
+        vector<int> t;
+        map<vector<int>, int> m;
+        util(m, t, v, vis, 0, n);
+        sort(ans.begin(), ans.end());
+        for(auto itr = m.begin(); itr != m.end(); itr++){
+            ans.push_back(itr->first);
+        }
+        return ans;
+    }
+};

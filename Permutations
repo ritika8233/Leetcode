@@ -1,0 +1,26 @@
+class Solution {
+public:
+    void util( bitset<6> &vis, vector<int> &v, vector<vector<int>> &ans, vector<int> t, int i, int n){
+        if(t.size() == n){
+            ans.push_back(t);
+          //  t.clear();
+        }
+        for(int j = 0; j < n; j++){
+            if(!vis[j]){
+                vis[j] = 1;
+                t.push_back(v[j]);
+                util(vis, v, ans, t, i+1, n);
+                vis[j] = 0;
+                t.pop_back();
+            }
+        }
+    }
+    vector<vector<int>> permute(vector<int>& v) {
+        bitset<6> vis;
+        int n = v.size();
+        vector<vector<int>> ans;
+        vector<int> t;
+        util(vis, v, ans, t, 0, n);
+        return ans;
+    }
+};

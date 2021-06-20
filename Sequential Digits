@@ -1,0 +1,21 @@
+class Solution {
+public:
+   void util(int i, int l, int h, int n, long long int num, vector<int> &v){
+        if(num >= l && num <= h){
+            v.push_back(num);
+        }
+       if(num > h || i > n)return; 
+        num = num*10 + i;
+        util(i+1, l, h, n, num, v);
+    }
+    vector<int> sequentialDigits(int l, int h) {
+        string s = "";
+        vector<int> v;
+        long long int num = 0;
+        for(int i = 1; i < 10; i++){
+           util(i, l, h, 9, num, v);   
+        }
+        sort(v.begin(), v.end());
+        return v;
+    }
+};

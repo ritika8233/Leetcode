@@ -1,0 +1,23 @@
+class Solution {
+public:
+   void util(int i, int &n, vector<int> &arr, vector<int> &t, set<vector<int>> &s){
+        s.insert(t);
+        if(i >= n)return; 
+        util(i+1, n, arr, t, s);
+        t.push_back(arr[i]);
+        util(i+1, n, arr, t, s);
+        t.pop_back();
+    }
+    vector<vector<int>> subsetsWithDup(vector<int>& arr) {
+        vector<vector<int>> ans;
+        set<vector<int>> s;
+        vector<int> t;
+        int n = arr.size();
+        sort(arr.begin(), arr.end());
+        util(0, n, arr, t, s);
+        for(auto itr = s.begin(); itr != s.end(); itr++){
+            ans.push_back(*itr);
+        }
+        return ans;
+    }
+};

@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void util(int i, vector<int> &t, set<vector<int>> &s, int &n, int &k){
+        if(t.size() == k){
+            s.insert(t);
+        }
+        if(t.size() > k || i > n)return;
+            util(i+1, t, s, n, k);
+            t.push_back(i);
+            util(i+1, t, s, n, k);
+            t.pop_back();
+    }
+    vector<vector<int>> combine(int n, int k) {
+        set<vector<int>> s;
+        vector<int> t;
+        util(1, t, s, n, k);
+        vector<vector<int>> ans;
+        
+        for(auto itr = s.begin(); itr != s.end(); itr++){
+            ans.push_back(*itr);
+        }
+        
+        return ans;
+    }
+};

@@ -1,0 +1,26 @@
+class Solution {
+public:
+   void util(int p, int &n, int i, int &c, string t, bitset<8> &vis){
+        if(t.length() !=0 && t.length() <= n && t[0] != '0'){
+            c++;
+        }
+       if(t.length() > n || i > p)return;
+       for(int j = 0; j < p+1; j++){
+            if(vis[j] == 0){
+            vis[j] = 1;
+            t += j + '0';
+            util(p, n, j, c, t, vis);
+            t = t.substr(0, t.length()-1);
+            vis[j] = 0;
+          }        
+       }
+   }
+    int countNumbersWithUniqueDigits(int n) {
+      if(n == 0)return 1;
+        string t = "";
+        bitset<8> vis;
+        int c = 0;
+        util(9, n, 0, c, t, vis);
+        return c+1;
+    }
+};

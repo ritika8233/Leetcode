@@ -1,0 +1,33 @@
+class Solution {
+public:
+    
+   void util(int i, int &n, int &k, vector<int> &v, string temp){
+        if(temp.length() == n){
+            int num = 0;
+            for(int j = 0; j < temp.length(); j++){
+                num = num*10 + (temp[j] -'0');
+            }
+            //cout<<temp<<" ";
+            v.push_back(num);
+        }
+        if(temp.length() > n || i > 9)return;
+        for(int j = 0; j <= 9; j++){
+            if((temp.length() == 0 && j != 0) || (temp.length() > 0 && abs((temp[temp.length()-1] - '0') - j) == k)){
+                temp += j +'0';
+                //num = num*10 + j;
+                util(j, n, k, v, temp);
+                temp = temp.substr(0, temp.length()-1);
+                //num = num/10;
+               }
+        }
+    }
+    
+    vector<int> numsSameConsecDiff(int n, int k) {
+        vector<int> v;
+        
+        string temp = "";
+        util(0, n, k, v, temp);
+        
+        return v;
+    }
+};

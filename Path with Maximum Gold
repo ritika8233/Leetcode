@@ -1,0 +1,47 @@
+class Solution {
+public:
+    bool check(int &r, int &c, int i, int j){
+        return (i >=0 && i < r && j >= 0 && j < c);
+    }
+    void util(int &r, int &c, int i, int j, vector<vector<int>> &mat, int &ans, int sum, vector<vector<int>> &vis){
+        if(mat[i][j] == 0) return ;
+        if(check(r, c, i, j)){
+            sum += mat[i][j];
+           // cout<<mat[i][j]<<" ";
+        }   
+        ans = max(ans, sum);
+        vis[i][j] = 1;
+        //up
+            if(check(r, c, i-1, j) && vis[i-1][j] == 0){
+                util(r, c, i-1, j, mat, ans, sum, vis);
+            }
+            //down
+            if(check(r, c, i+1, j) && vis[i+1][j] == 0){
+                util(r, c, i+1, j, mat, ans, sum, vis);
+            }
+            //left
+            if(check(r, c, i, j-1) && vis[i][j-1] == 0){
+                util(r, c, i, j-1, mat, ans, sum, vis);
+            }
+            //right
+            if(check(r, c, i, j+1) && vis[i][j+1] == 0){
+                util(r, c, i, j+1, mat, ans, sum, vis);
+            }
+            vis[i][j] = 0;
+           sum -= mat[i][j];
+    }
+    int getMaximumGold(vector<vector<int>>& mat) {
+        int r = mat.size();
+        int c = mat[0].size();
+        int ans = 0, sum = 0;
+        vector<vector<int>> vis(r, vector<int>(c, 0));
+        for(int i = 0; i < r; i++){
+            for(int j = 0; j < c; j++){
+                sum = 0;
+                util(r, c, i, j, mat, ans, sum, vis);        
+            }
+        }
+        //util(r, c, 2, 1, mat, ans, sum, vis);        
+        return ans;
+    }
+};

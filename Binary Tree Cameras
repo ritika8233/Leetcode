@@ -1,0 +1,26 @@
+class Solution {
+public:
+    // na camera na roshni 0
+    // camera 2
+    // camera ki light 1
+    int util(TreeNode* root, int &c){
+        if(!root)return 1;
+        int left = util(root->left, c);
+        int right = util(root->right, c);
+        
+        if(left == 0 || right == 0){
+            c++;
+            return 2;
+        }
+        if(left == 2 || right == 2){
+            return 1;
+        }
+        else return 0;
+    }
+    int minCameraCover(TreeNode* root) {
+        int c = 0;
+        int ans = util(root, c);
+        if(ans == 0)c++;
+        return c;
+    }
+};

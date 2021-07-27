@@ -1,0 +1,26 @@
+class solution{
+public:
+  int util(int &temp, int arr[], int n, int sum, vector<vector<int>> &dp){
+      if(sum >= temp || n == 0){
+          return sum;
+      }
+      if(dp[n][sum] != -1)return dp[n][sum];
+      int x = 0, y = 0;
+      if((sum + arr[n-1]) <= temp){
+          x = util(temp, arr, n-1, sum + arr[n-1], dp);
+      }
+      y = util(temp, arr, n-1, sum, dp);
+      return dp[n][sum] = max(x, y);
+  }
+	int minDifference(int arr[], int n)  { 
+	    int sum = 0;
+	    for(int i = 0; i < n; i++){
+	        sum += arr[i];
+	    }
+	    vector<vector<int>> dp(n+1, vector<int>(sum+1, -1));
+	    int temp = sum/2;
+	    int ans = util(temp, arr, n, 0, dp);
+	    int temp2 = sum - ans;
+	    return abs(temp2 - ans);
+	} 
+};

@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int util(int n, string &a, int m, string &b, vector<vector<int>> &dp){
+        if(n == 0)return m;
+        if(m == 0)return n;
+        if(dp[n][m] != -1)return dp[n][m];
+        int eq = 1001, rep = 1001, del = 1001, in = 1001;
+        if(a[n-1] == b[m-1]){
+            eq = util(n-1, a, m-1, b, dp);
+        }
+        rep = 1 + util(n-1, a, m-1, b, dp);
+        del = 1 + util(n-1, a, m, b, dp);
+        in = 1 + util(n, a, m-1, b, dp);
+        return dp[n][m] =min(eq, min(rep, min(del, in)));
+    }
+    int minDistance(string a, string b) {
+        int n = a.length();
+        int m = b.length();
+        
+        vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
+        int ans = util(n, a, m, b, dp);
+        
+        return ans;
+    }
+};

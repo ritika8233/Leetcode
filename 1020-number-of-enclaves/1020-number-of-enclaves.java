@@ -5,11 +5,6 @@ class Result{
     
     Result(){}
     
-    Result(int c, boolean status){
-        this.c = c;
-        this.status = status;
-    }
-
 }
 
 class Solution {

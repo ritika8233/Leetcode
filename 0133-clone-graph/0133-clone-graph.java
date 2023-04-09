@@ -22,7 +22,7 @@ class Solution {
     
     public void dfs(Node root, Node node, Node[] vis){
         
-        // if(node == null)return;
+        if(node == null)return;
         
         vis[root.val] = root;
         

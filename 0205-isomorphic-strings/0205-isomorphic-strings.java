@@ -15,6 +15,7 @@ class Solution {
             Integer t2 = m2.get(t.charAt(i));
             
             if(t2 != t1)return false;
+            if(c1 != c2)return false;
             
             if(t1 != null){
                 
@@ -31,11 +32,8 @@ class Solution {
                 c2++;
             }
             
-            if(c1 != c2)return false;
         }
         
-        // System.out.println(sb1.toString());
-        // System.out.println(sb2.toString());
         
         return sb1.toString().equals(sb2.toString());
     }

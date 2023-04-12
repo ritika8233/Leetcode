@@ -6,9 +6,7 @@ class Solution {
         Map<Character, Integer> m2 = new HashMap<>();
         
         int c1 = 1, c2 = 1;
-        StringBuilder sb1 = new StringBuilder();
-        StringBuilder sb2 = new StringBuilder();
-        
+
         for(int i = 0; i < n; i++){
             
             Integer t1 = m1.get(s.charAt(i));
@@ -17,17 +15,11 @@ class Solution {
             if(t2 != t1)return false;
             if(c1 != c2)return false;
             
-            if(t1 != null){
+            if(t1 == null){
                 
-                sb1.append(String.valueOf(t1) );
-                sb2.append(String.valueOf(t2) );
-            }
-            else{
-                sb1.append(String.valueOf(c1));
                 m1.put(s.charAt(i), c1);
                 c1++;
                 
-                sb2.append(String.valueOf(c2));
                 m2.put(t.charAt(i), c2);
                 c2++;
             }
@@ -35,6 +27,5 @@ class Solution {
         }
         
         return true;
-        // return sb1.toString().equals(sb2.toString());
     }
 }

@@ -1,43 +1,31 @@
 class Solution {
     
-    
-    public boolean dfs(int i, int j, int r, int c, int[][] arr, int[][] vis){
+    public boolean util(int[][] arr, int i, int j, int r, int c){
         
-        if(i < 0 || j < 0 || i >= r || j >= c )return false;
+        if(i < 0 || j < 0 || i >= r|| j >= c)return false;
         
-        if(arr[i][j] == 1){
-            return true;
-        }
+        if(arr[i][j] == 1)return true;
         
-        if(vis[i][j] == 1)return true;
+        arr[i][j] = 1;
         
-        vis[i][j] = 1;
+        boolean left = false, right = false, top = false, bottom = false;
         
+        left = util(arr, i, j-1, r, c);
+        right = util(arr, i, j+1, r, c);
+        top = util(arr, i-1, j, r, c);
+        bottom = util(arr, i+1, j, r, c);
         
+        return left && right && top && bottom;
         
-        boolean left = dfs(i, j-1, r, c, arr, vis);
-        boolean right = dfs(i, j+1, r, c, arr, vis);
-        boolean up = dfs(i-1, j, r, c, arr, vis);
-        boolean bottom = dfs(i+1, j, r, c, arr, vis);
-        
-        return left & right & up & bottom;
     }
     
     public int closedIsland(int[][] arr) {
         
-        int r = arr.length, c = arr[0].length, ans = 0;
-        int[][] vis = new int[r][c];
+        int ans = 0, r = arr.length, c = arr[0].length;
         
         for(int i = 0; i < r; i++){
             for(int j = 0; j < c; j++){
-                
-                if(arr[i][j] == 0 && vis[i][j] == 0){
-                    
-                    if(dfs(i, j, r, c, arr, vis)){
-                        ans++;
-                    }
-                    // System.out.println(i + "-" + j + "="+ans);
-                }
+                if( arr[i][j] == 0 && util(arr, i, j, r, c)) ans++;
             }
         }
         

@@ -8,13 +8,13 @@ class Solution {
         if(arr[0][0] == 1 || arr[n-1][n-1] == 1)return -1;
         int i = 0, j = 0;
         
-        q.add(new int[] {i-1, j});
+        // q.add(new int[] {i-1, j});
         q.add(new int[] {i+1, j});
-        q.add(new int[] {i-1, j-1});
+        // q.add(new int[] {i-1, j-1});
         q.add(new int[] {i+1, j+1});
-        q.add(new int[] {i-1, j+1});
-        q.add(new int[] {i+1, j-1});
-        q.add(new int[] {i, j-1});
+        // q.add(new int[] {i-1, j+1});
+        // q.add(new int[] {i+1, j-1});
+        // q.add(new int[] {i, j-1});
         q.add(new int[] {i, j+1});
         
         arr[0][0] = 1;

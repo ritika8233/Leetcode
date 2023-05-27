@@ -1,6 +1,6 @@
 class Solution {
     public boolean checkIfExist(int[] arr) {
-        Arrays.sort(arr);
+        // Arrays.sort(arr);
         int n = arr.length;
         Map<Integer, Integer> m =  new HashMap<>();
         
@@ -15,7 +15,7 @@ class Solution {
             }
             m.put(arr[i], 1);
         }
-        
+        //-20 -10 -8 12 15
         
         return false;
     }
